@@ -1,0 +1,91 @@
+屏幕适配
+storyboard自定义cell
+核心要点:
+1,如何创建,根据cell的identifier自动创建 
+2,不需要注册 
+3,不需要为cell单独创建xib
+
+屏幕的适配
+1,为什么需要做屏幕的适配
+横竖屏情况,界面内部的控件根据,界面view的高度和宽度的不同变化,做出相应适配
+不同尺寸屏幕的情况,同上
+核心:界面内部的控件根据界面的大小的变化而进行适配
+
+iPhone都有哪些尺寸:
+         分辨率(px:像素点)   程序坐标系单位(pt 点)    美工出图
+
+iPhone3gs    320*480        320*480 (缩放因子 1)  320*480
+iPhone4/4s   (4s)640*960    320*480 (缩放因子 2)  640*960
+iPhone5/5s   640*1136	    320*568 (缩放因子 2)  640*1136
+iPhone6/6s   750*1334       375*667 (缩放因子 2)  750*1334
+
+iPhone6 Plus /6s Plus
+             1080*1920      414*736 (缩放因子 3) 1242*2208
+
+程序里面有一个缩放因子,scale px和pt的缩放比例
+px = scale*pt
+
+
+//iPad的课下自己查,所有的,下周提问,所有的分辨率上来写
+iPad mini/mini2
+iPad 2
+iPad air
+
+2,屏幕的适配都要做哪些事情
+改变控件的大小,来适应屏幕的变化
+
+苹果提供的适配的技术
+1,6.0之前 Autosizeing
+2,6.0之后 Autolayout  (推荐)
+程序员自己搞
+3,相对坐标 (推荐)
+
+
+size class
+核心:
+使用 Compact，Regular，Any，即紧凑，正常和任意。
+三种组合来代表所有的设备的屏幕.
+
+//从 Xcode 6 开始，xib 默认的大小是 600 * 600。这是因为苹果在 iOS 8 中新增了一个屏幕适配的技术，叫做 sizeClass。
+
+//实际开发项目的时候，通常有 iPhone 和 iPad 两个版本，两者内容完全一样，只是 UI 不同。我们需要建立两个工程对应实现。sizeClass 抛弃了我们传统上的屏幕宽高尺寸，它把屏幕的宽高分别抽象为三种情况：Compact，Regular，Any，即紧凑，正常和任意。这样宽高总共有九种组合，包含了所有 iOS 设备的屏幕类型(iPhone，iPod，iPad，iWatch)。我们就可以在一个 xib 文件中为每个控件在不同类型的屏幕下设置不同约束条件，达到在不同屏幕下展示不同效果的目的。
+    
+//具体宽高组合和屏幕尺寸对应关系可以参考图片 ‘宽高组合和屏幕尺寸对应关系.png’，或者在 xib 中选择查看。
+    
+//宽高组合中，any * any 组合是默认的，即 600 * 600。在这个状态下我们设置约束在所有的屏幕分辨率下都会生效。
+    
+//如果我们需要为某一个屏幕单独设置约束，我们需要选择我们需要的状态，然后设置约束。
+        
+//sizeClass 允许我们为同一个控件在不同的屏幕下设置不同的约束。
+    
+//xib 中设置约束参考图片 ‘AutoLayout约束图解.png’，‘xib.png’，‘添加约束.png’。
+
+
+
+使用autolayout动态计算cell的高度
+http://www.th7.cn/Program/IOS/201501/376965.shtml
+
+
+Content Hugging Priority和Content Compression Resistance Priority
+Content Hugging：内容压缩，阻止视图的实际尺寸比intrinsicContentSize返回的更大
+Content Compression Resistance：阻止内容压缩，阻止视图的实际尺寸比intrinsicContentSize返回的更小。
+Content Hugging Priority：内容压缩优先级，默认为250
+Content Compression Resistance Priority：阻止内容压缩优先级，默认为750
+
+1,添加合理的约束
+2,设置 Content Hugging Priority和Content Compression Resistance Priority
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
